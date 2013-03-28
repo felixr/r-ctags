@@ -45,22 +45,22 @@ FILENAME != currentfile {
 # functions
 /.*<-.*/ {
     
-    if ( match($0, /^([a-zA-Z0-9.]+)\$new[[:space:]]*<-[[:space:]]*function/, a) ) {
+    if ( match($0, /^([_a-zA-Z0-9.]+)\$new[[:space:]]*<-[[:space:]]*function/, a) ) {
         # class$new <- function()   
         new_tag(a[1], linenum,  curline, "c")
         new_tag("new", linenum, curline, "m\tclass:" a[1])
     }else 
-    if ( match($0, /^([a-zA-Z0-9.]+)\$([a-zA-Z0-9_]+)[[:space:]]*<-[[:space:]]*function/, a) ) {
+    if ( match($0, /^([_a-zA-Z0-9.]+)\$([a-zA-Z0-9_]+)[[:space:]]*<-[[:space:]]*function/, a) ) {
         # class$method <- function()   
         new_tag(a[2], linenum, curline, "m\tclass:" a[1])
     }else
-    if ( match($0, /^([a-zA-Z0-9.]+)[[:space:]]*<-[[:space:]]*function/, a) ) {
+    if ( match($0, /^([_a-zA-Z0-9.]+)[[:space:]]*<-[[:space:]]*function/, a) ) {
         # fname <- function()   
         new_tag(a[1], linenum, curline, "f")
     }else
-    if (match($0, /^([a-zA-Z.][a-zA-Z0-9._]*)[[:space:]]<-/, a )) {
+    if (match($0, /^([_a-zA-Z.][a-zA-Z0-9._]*)[[:space:]]<-/, a )) {
         # varname <- value   
-        match($0, /^([a-zA-Z0-9._]+)[[:space:]]*<-/, a) 
+        match($0, /^([_a-zA-Z0-9._]+)[[:space:]]*<-/, a) 
         new_tag(a[1], linenum, curline, "v")
     }
 }
